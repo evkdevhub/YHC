@@ -1,9 +1,18 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Phone, Menu, Star } from "lucide-react";
+import { Phone, Menu, Star, X } from "lucide-react";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const scrollToApplication = () => {
     document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
   };
 
   const handleCall = () => {
@@ -38,11 +47,70 @@ export default function Header() {
           </div>
           
           <div className="md:hidden">
-            <Button variant="ghost" size="icon" className="text-white">
-              <Menu className="w-6 h-6" />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-white"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </Button>
           </div>
         </div>
+        
+        {/* Mobile Navigation Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-navy border-t border-white/20">
+            <div className="px-4 py-6 space-y-4">
+              <button
+                onClick={() => scrollToSection('benefits')}
+                className="block w-full text-left text-white hover:text-gold transition-colors py-2"
+              >
+                Why Drive for Us
+              </button>
+              <button
+                onClick={() => scrollToSection('pay')}
+                className="block w-full text-left text-white hover:text-gold transition-colors py-2"
+              >
+                Pay & Benefits
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonials')}
+                className="block w-full text-left text-white hover:text-gold transition-colors py-2"
+              >
+                Driver Reviews
+              </button>
+              <button
+                onClick={() => scrollToSection('faq')}
+                className="block w-full text-left text-white hover:text-gold transition-colors py-2"
+              >
+                Requirements
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="block w-full text-left text-white hover:text-gold transition-colors py-2"
+              >
+                Contact Us
+              </button>
+              <div className="pt-4 border-t border-white/20">
+                <Button 
+                  onClick={handleCall}
+                  variant="outline"
+                  className="w-full border-gold text-gold hover:bg-gold hover:text-navy mb-3"
+                >
+                  <Phone className="mr-2 w-4 h-4" />
+                  Call: 1-800-MYSTAR1
+                </Button>
+                <Button 
+                  onClick={scrollToApplication}
+                  className="w-full bg-cta-orange hover:bg-red-600 text-white"
+                >
+                  Apply Now
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
