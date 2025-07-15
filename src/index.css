@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 40%, 16%);
+  --muted: hsl(210, 40%, 98%);
+  --muted-foreground: hsl(215, 16%, 47%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 40%, 16%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(210, 40%, 16%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --primary: hsl(39, 54%, 51%);
+  --primary-foreground: hsl(210, 40%, 16%);
+  --secondary: hsl(210, 40%, 98%);
+  --secondary-foreground: hsl(210, 40%, 16%);
+  --accent: hsl(210, 40%, 98%);
+  --accent-foreground: hsl(210, 40%, 16%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(60, 9%, 98%);
+  --ring: hsl(210, 40%, 16%);
+  --radius: 0.5rem;
+  
+  /* Custom colors for My Star LLC */
+  --navy: hsl(220, 35%, 20%);
+  --gold: hsl(39, 54%, 51%);
+  --light-gray: hsl(220, 14%, 96%);
+  --cta-orange: hsl(15, 79%, 55%);
+}
+
+.dark {
+  --background: hsl(220, 35%, 20%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(220, 35%, 25%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(220, 35%, 20%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(220, 35%, 20%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(220, 35%, 25%);
+  --input: hsl(220, 35%, 25%);
+  --primary: hsl(39, 54%, 51%);
+  --primary-foreground: hsl(220, 35%, 20%);
+  --secondary: hsl(220, 35%, 25%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(220, 35%, 25%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(215, 20%, 65%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+  }
+}
+
+/* Custom utility classes */
+.text-navy {
+  color: hsl(220, 35%, 20%);
+}
+
+.text-gold {
+  color: hsl(39, 54%, 51%);
+}
+
+.text-cta-orange {
+  color: hsl(15, 79%, 55%);
+}
+
+.bg-navy {
+  background-color: hsl(220, 35%, 20%);
+}
+
+.bg-gold {
+  background-color: hsl(39, 54%, 51%);
+}
+
+.bg-light-gray {
+  background-color: hsl(220, 14%, 96%);
+}
+
+.bg-cta-orange {
+  background-color: hsl(15, 79%, 55%);
+}
+
+.border-gold {
+  border-color: hsl(39, 54%, 51%);
+}
+
+.border-navy {
+  border-color: hsl(220, 35%, 20%);
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Chat widget custom styles */
+.chat-messages::-webkit-scrollbar {
+  width: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: hsl(220, 14%, 96%);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: hsl(39, 54%, 51%);
+  border-radius: 2px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: hsl(39, 54%, 45%);
+}
+
