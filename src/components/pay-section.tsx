@@ -30,7 +30,7 @@ export default function PaySection() {
   };
 
   return (
-    <section id="pay" className="py-20 bg-navy text-white">
+    <section id="pay" className="py-20 bg-light-gray text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="font-bold text-4xl lg:text-5xl mb-6">

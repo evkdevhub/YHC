@@ -8,20 +8,23 @@ import ApplicationForm from "@/components/application-form";
 import ContactSection from "@/components/contact-section";
 import ChatWidget from "@/components/chat-widget";
 import Footer from "@/components/footer";
+import { ParallaxProvider } from "react-scroll-parallax"; // добавлено 👈
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <HeroSection />
-      <BenefitsSection />
-      <PaySection /> 
-      <TestimonialsSection />
-      <FaqSection />
-      <ApplicationForm />
-      <ContactSection />
-      <ChatWidget />
-      <Footer />
-    </div>
+    <ParallaxProvider> {/* 👈 обернули весь сайт */}
+      <div className="min-h-screen bg-white">
+        <Header />
+        <HeroSection />
+        <BenefitsSection />
+        <PaySection />
+        <TestimonialsSection />
+        <FaqSection />
+        <ApplicationForm />
+        <ContactSection />
+        <ChatWidget />
+        <Footer />
+      </div>
+    </ParallaxProvider>
   );
 }

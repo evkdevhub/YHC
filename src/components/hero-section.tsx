@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Star, ClipboardCheck, Phone } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const scrollToApplication = () => {
-    document.getElementById('application-form')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById("application-form")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleCall = () => {
-    window.location.href = 'tel:1-800-697-8271';
+    window.location.href = "tel:1-800-697-8271";
   };
 
   return (
@@ -29,36 +30,88 @@ export default function HeroSection() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-      {/* Контент — вертикальное центрирование через flex */}
-      <div
-        className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-end min-h-[calc(100vh-80px)]"
-      >
+      {/* Контент */}
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-end min-h-[calc(100vh-80px)]">
         <div className="max-w-3xl text-right w-full">
-          <h1 className="font-bold text-4xl sm:text-5xl lg:text-7xl leading-tight mb-6">
-            Drive for a Company That Treats You Like a{' '}
+
+          {/* Заголовок */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="font-bold text-4xl sm:text-5xl lg:text-7xl leading-tight mb-6"
+          >
+            Drive for a Company That Treats You Like a{" "}
             <span className="text-gold">Star</span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-xl sm:text-2xl lg:text-3xl font-medium mb-10 text-gray-200">
+          {/* Подзаголовок */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="text-xl sm:text-2xl lg:text-3xl font-medium mb-10 text-gray-200"
+          >
             Great Pay. Real Respect. Flexible Routes
-          </p>
+          </motion.p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-right">
-            <div className="flex flex-col items-end">
-              <div className="text-3xl sm:text-3xl font-bold text-gold">$0.70 <span className="text-base sm:text-lg text-gold">per mile</span></div>
-              <div className="text-base sm:text-lg text-gray-300">Dispatched Pay Rates</div>
-            </div>
-            <div className="flex flex-col items-end">
-              <div className="text-3xl sm:text-3xl font-bold text-gold">$90K+ <span className="text-base sm:text-lg text-gold">per year</span></div>
-              <div className="text-base sm:text-lg text-gray-300">Average Annual Earnings</div>
-            </div>
-            <div className="flex flex-col items-end">
-              <div className="text-3xl sm:text-3xl font-bold text-gold">3,000+ <span className="text-base sm:text-lg text-gold">Miles/Week</span></div>
-              <div className="text-base sm:text-lg text-gray-300">Steady Loads. No Sitting.</div>
-            </div>
-          </div>
+          {/* 3 цифры */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.2,
+                },
+              },
+            }}
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-right"
+          >
+            {[
+              {
+                amount: "$0.70",
+                label: "per mile",
+                description: "Dispatched Pay Rates",
+              },
+              {
+                amount: "$90K+",
+                label: "per year",
+                description: "Average Annual Earnings",
+              },
+              {
+                amount: "3,000+",
+                label: "Miles/Week",
+                description: "Steady Loads. No Sitting",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.6 }}
+                className="flex flex-col items-end"
+              >
+                <div className="text-3xl sm:text-3xl font-bold text-gold">
+                  {item.amount}{" "}
+                  <span className="text-base sm:text-lg text-gold">{item.label}</span>
+                </div>
+                <div className="text-base sm:text-lg text-gray-300">
+                  {item.description}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-          <div className="mt-10 flex flex-col sm:flex-row sm:justify-end sm:space-x-6 space-y-4 sm:space-y-0 mb-10">
+          {/* Кнопка */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="mt-10 flex flex-col sm:flex-row sm:justify-end sm:space-x-6 space-y-4 sm:space-y-0 mb-10"
+          >
             <style>{`
               .truck {
                 position: absolute;
@@ -95,16 +148,14 @@ export default function HeroSection() {
               className="bg-gold hover:bg-lime-500 text-white px-8 py-4 text-xl font-semibold w-full max-w-lg rounded-lg transition-all flex items-center justify-center gap-3 group relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-red-300"
               size="lg"
             >
-              <span className="block">
-                Apply Now — Start Earning Tomorrow
+              <span className="block text-sm sm:text-base md:text-lg lg:text-xl">
+                  Apply Now — Start Earning Tomorrow
               </span>
-              <img
-                src="/applynowtruck.png"
-                alt="Truck"
-                className="truck"
-              />
+
+              <img src="/applynowtruck.png" alt="Truck" className="truck hidden sm:block" />
+
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

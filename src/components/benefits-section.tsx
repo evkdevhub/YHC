@@ -1,62 +1,90 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Star } from "lucide-react";
+import { motion } from "framer-motion";
 
 const benefits = [
   {
     title: "Top Weekly Pay",
-    description: "Earn $1,500-$2,200+ per week with our competitive per-mile rates, performance bonuses, and guaranteed minimum weekly pay."
+    description:
+      "Make $2,100+ weekly with strong per-mile rates. No sitting idle — your truck is always moving with steady, regular loads.",
   },
   {
-    title: "Home Time Guaranteed",
-    description: "Choose your schedule: 34-hour reset at home every week or 4 days home every 2 weeks. Your family time matters."
-  },
-  {
-    title: "Premium Equipment",
-    description: "Drive late-model Freightliner and Peterbilt trucks with APUs, comfortable sleepers, and top maintenance."
-  },
-  {
-    title: "Full Benefits Package",
-    description: "Medical, dental, vision, 401K with company match, paid vacation, and life insurance from day one."
-  },
-  {
-    title: "No Touch Freight",
-    description: "Focus on driving, not loading. Our freight is primarily drop-and-hook with dedicated customer accounts."
+    title: "Partnered with Industry Leaders",
+    description:
+      "Drive for trusted brands like FedEx, Amazon, and UPS. Enjoy consistent, high-volume freight from reliable clients.",
   },
   {
     title: "24/7 Dispatch Support",
-    description: "Our experienced dispatch team is always available to help with routes, load planning, and any issues on the road."
-  }
+    description:
+      "Our experienced dispatch team is always available to help with routes, load planning, and any issues on the road.",
+  },
+  {
+    title: "Flexible Home Time",
+    description:
+      "Our drivers usually spend about 3–4 weeks on the road per trip. However, when life happens, we are flexible and always ready to work with you. That's why we don't have a set home time policy.",
+  },
+  {
+    title: "Comfort & Reliability on the Road",
+    description:
+      "We run a modern fleet of Freightliner, Volvo, and Kenworth trucks, all equipped with APUs, comfortable sleepers, fridges, and microwaves — carefully maintained for your safety and comfort.",
+  },
+
+  {
+    title: "No Touch Freight",
+    description:
+      "Just hook up and drive. Our freight is 90% drop-and-hook, so you won’t waste time loading or unloading. You can stay focused on what matters most — driving safely and earning steady miles.",
+  },
+  
 ];
 
 export default function BenefitsSection() {
   return (
-    <section id="benefits" className="py-20 bg-light-gray">
+    <section id="benefits" className="py-16 bg-light-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="font-bold text-4xl lg:text-5xl text-navy mb-6">
+
+        {/* Заголовок + описание с анимацией */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="font-bold text-4xl lg:text-5xl text-navy mb-4">
             Why Drive for My Star LLC?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We don't just hire drivers - we build careers. Join a family-owned company that puts your success first.
+            We don’t just hire drivers — we build careers. Join our family-owned company where your success comes first. Reliable pay, respect, and real growth await.
           </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </motion.div>
+
+        {/* Сетка карточек с анимацией по очереди */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
-            <Card key={index} className="bg-white shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-4">
-                  <Star className="text-gold w-6 h-6 fill-current mr-3" />
-                  <h3 className="font-semibold text-xl text-navy">{benefit.title}</h3>
-                </div>
-                <p className="text-gray-600 leading-relaxed">
-                  {benefit.description}
-                </p>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <Card className="bg-white shadow-lg hover:shadow-2xl transform transition duration-300 hover:-translate-y-1">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-3">
+                    <Star className="text-gold w-5 h-5 fill-current mr-2" />
+                    <h3 className="font-semibold text-lg text-navy">
+                      {benefit.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-600 leading-relaxed text-sm">
+                    {benefit.description}
+                  </p>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+} 
