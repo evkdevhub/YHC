@@ -4,14 +4,11 @@ import { z } from "zod";
 
 export const applications = pgTable("applications", {
   id: serial("id").primaryKey(),
-  firstName: text("first_name").notNull(),
-  lastName: text("last_name").notNull(),
+  fullName: text("Full_name").notNull(),
   email: text("email").notNull(),
   phone: text("phone").notNull(),
-  licenseType: text("license_type").notNull(),
   experience: text("experience").notNull(),
   currentLocation: text("current_location").notNull(),
-  preferredHomeTime: text("preferred_home_time"),
   additionalInfo: text("additional_info"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

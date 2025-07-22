@@ -28,18 +28,18 @@ export default function HeroSection() {
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-10"></div>
+      <div className="absolute inset-0 bg-black/60 z-10"></div>
 
       {/* Контент */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-end min-h-[calc(100vh-80px)]">
-        <div className="max-w-3xl text-right w-full">
+        <div className="max-w-3xl w-full text-center sm:text-right">
 
           {/* Заголовок */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="font-bold text-4xl sm:text-5xl lg:text-7xl leading-tight mb-6"
+            className="font-bold text-3xl sm:text-5xl lg:text-7xl leading-tight mb-4 sm:mb-6"
           >
             Drive for a Company That Treats You Like a{" "}
             <span className="text-gold">Star</span>
@@ -50,7 +50,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="text-xl sm:text-2xl lg:text-3xl font-medium mb-10 text-gray-200"
+            className="text-base sm:text-2xl lg:text-3xl font-medium mb-6 sm:mb-10 text-gray-200"
           >
             Great Pay. Real Respect. Flexible Routes
           </motion.p>
@@ -66,7 +66,7 @@ export default function HeroSection() {
                 },
               },
             }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-right"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center sm:text-right"
           >
             {[
               {
@@ -92,13 +92,13 @@ export default function HeroSection() {
                   visible: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.6 }}
-                className="flex flex-col items-end"
+                className="flex flex-col items-center sm:items-end"
               >
-                <div className="text-3xl sm:text-3xl font-bold text-gold">
+                <div className="text-2xl sm:text-3xl font-bold text-gold">
                   {item.amount}{" "}
-                  <span className="text-base sm:text-lg text-gold">{item.label}</span>
+                  <span className="text-sm sm:text-lg text-gold">{item.label}</span>
                 </div>
-                <div className="text-base sm:text-lg text-gray-300">
+                <div className="text-sm sm:text-lg text-gray-300">
                   {item.description}
                 </div>
               </motion.div>
@@ -110,7 +110,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.6 }}
-            className="mt-10 flex flex-col sm:flex-row sm:justify-end sm:space-x-6 space-y-4 sm:space-y-0 mb-10"
+            className="mt-8 sm:mt-10 flex flex-col sm:flex-row sm:justify-end sm:space-x-6 space-y-4 sm:space-y-0 mb-8 sm:mb-10"
           >
             <style>{`
               .truck {
@@ -145,15 +145,21 @@ export default function HeroSection() {
 
             <Button
               onClick={scrollToApplication}
-              className="bg-gold hover:bg-lime-500 text-white px-8 py-4 text-xl font-semibold w-full max-w-lg rounded-lg transition-all flex items-center justify-center gap-3 group relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-red-300"
+              className="bg-gradient-to-r from-yellow-500 to-yellow-700 
+hover:from-lime-500 hover:to-lime-700 
+text-white tracking-wide font-extrabold px-6 py-3 sm:px-8 sm:py-4 text-lg sm:text-xl w-full max-w-lg rounded-full shadow-xl hover:shadow-2xl 
+transform hover:scale-105 
+transition-all duration-300 flex items-center justify-center gap-3 group relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-red-300"
               size="lg"
             >
               <span className="block text-sm sm:text-base md:text-lg lg:text-xl">
-                  Apply Now — Start Earning Tomorrow
+                Apply Now — Start Earning Tomorrow
               </span>
-
-              <img src="/applynowtruck.png" alt="Truck" className="truck hidden sm:block" />
-
+              <img
+                src="/applynowtruck.png"
+                alt="Truck"
+                className="truck hidden sm:block"
+              />
             </Button>
           </motion.div>
         </div>

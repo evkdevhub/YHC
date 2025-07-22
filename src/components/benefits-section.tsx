@@ -28,29 +28,27 @@ const benefits = [
     description:
       "We run a modern fleet of Freightliner, Volvo, and Kenworth trucks, all equipped with APUs, comfortable sleepers, fridges, and microwaves — carefully maintained for your safety and comfort.",
   },
-
   {
     title: "No Touch Freight",
     description:
       "Just hook up and drive. Our freight is 90% drop-and-hook, so you won’t waste time loading or unloading. You can stay focused on what matters most — driving safely and earning steady miles.",
   },
-  
 ];
 
 export default function BenefitsSection() {
   return (
-    <section id="benefits" className="py-16 bg-light-gray">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Заголовок + описание с анимацией */}
+    <section className="min-h-screen py-16 bg-light-gray flex items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Заголовок + описание */}
         <motion.div
+          id="benefits"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-12 scroll-mt-24"
         >
-          <h2 className="font-bold text-4xl lg:text-5xl text-navy mb-4">
+          <h2 className="font-bold text-4xl lg:text-5xl text-cyan-950 mb-4">
             Why Drive for My Star LLC?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -58,7 +56,7 @@ export default function BenefitsSection() {
           </p>
         </motion.div>
 
-        {/* Сетка карточек с анимацией по очереди */}
+        {/* Карточки */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
             <motion.div
@@ -72,7 +70,7 @@ export default function BenefitsSection() {
                 <CardContent className="p-6">
                   <div className="flex items-center mb-3">
                     <Star className="text-gold w-5 h-5 fill-current mr-2" />
-                    <h3 className="font-semibold text-lg text-navy">
+                    <h3 className="font-semibold text-lg text-cyan-950">
                       {benefit.title}
                     </h3>
                   </div>
@@ -87,4 +85,4 @@ export default function BenefitsSection() {
       </div>
     </section>
   );
-} 
+}
