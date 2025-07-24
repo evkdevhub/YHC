@@ -35,7 +35,7 @@ const contacts = [
     title: "Visit Us",
     info1: (
       <>
-        2487 Tradeport Dr Suite 106 <br />
+        365 W Taft Vineland Rd, Suite 106 <br />
         Orlando, FL 32824, United States
       </>
     ),

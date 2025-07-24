@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import InputMask from "react-input-mask";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -20,7 +21,14 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Добавляем строгую валидацию поверх базовой схемы
 const formSchema = insertApplicationSchema.extend({
+  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z
+    .string()
+    .min(10, "Phone number must be at least 10 digits")
+    .regex(/^[\d+()\-\s]+$/, "Phone number contains invalid characters"),
   consent: z.boolean().refine((val) => val === true, "Consent is required"),
 });
 
@@ -34,11 +42,9 @@ export default function ApplicationForm() {
       fullName: "",
       phone: "",
       email: "",
-      experience: "",
-      currentLocation: "",
-      additionalInfo: "",
       consent: false,
     },
+    mode: "onChange", // валидировать по мере ввода
   });
 
   const submitApplication = useMutation({
@@ -132,7 +138,6 @@ export default function ApplicationForm() {
           100% { transform: translateY(-30px) translateX(20px); opacity: 0.5; }
         }
 
-        /* Мобильные правки */
         @media (max-width: 640px) {
           input {
             font-size: 1rem;
@@ -170,7 +175,7 @@ export default function ApplicationForm() {
             </p>
           </div>
 
-<Card className="bg-white/5 border border-white/5 rounded-3xl backdrop-blur-lg shadow-3xl transition-all duration-300 max-w-2xl mx-auto w-full mb-10">
+          <Card className="bg-white/5 border border-white/5 rounded-3xl backdrop-blur-lg shadow-3xl transition-all duration-300 max-w-2xl mx-auto w-full mb-10">
             <CardContent className="p-5 space-y-5 text-white">
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
                 {[
@@ -187,8 +192,6 @@ export default function ApplicationForm() {
                     type: "tel",
                     icon: <Phone className="w-5 h-4 text-yellow-400" />,
                     placeholder: "Phone Number",
-                    register: form.register("phone"),
-                    error: form.formState.errors.phone?.message,
                   },
                   {
                     id: "email",
@@ -199,8 +202,72 @@ export default function ApplicationForm() {
                     error: form.formState.errors.email?.message,
                   },
                 ].map(({ id, type, icon, placeholder, register, error }) => {
-                  const value = form.watch(id);
+                  if (id === "phone") {
+                    const value = form.watch("phone") || "";
+                    const focused = focusStates[id] || false;
+                    return (
+                      <Controller
+                        key={id}
+                        control={form.control}
+                        name="phone"
+                        render={({ field }) => (
+                          <div className="relative w-full">
+                            <div className="flex items-center space-x-5 border-b border-white/30 pb-2 w-full">
+                              <div className="mr-2">{icon}</div>
+                              <InputMask
+                                mask="(999) 999-9999"
+                                value={field.value || ""}
+                                onChange={field.onChange}
+                                onBlur={() => {
+                                  field.onBlur();
+                                  setFocusStates((s) => ({ ...s, [id]: false }));
+                                }}
+                                onFocus={() =>
+                                  setFocusStates((s) => ({ ...s, [id]: true }))
+                                }
+                              >
+                                {(inputProps) => (
+                                  <input
+                                    {...inputProps}
+                                    type="tel"
+                                    placeholder=" "
+                                    className="bg-transparent flex-1 w-full text-white placeholder-transparent outline-none text-lg px-1 py-2"
+                                  />
+                                )}
+                              </InputMask>
+                              <label
+                                htmlFor={id}
+                                className={`absolute left-8 top-2 origin-left transform text-white transition-all duration-300 pointer-events-none ${
+                                  isActive(value, focused)
+                                    ? "-translate-y-5 scale-75 text-yellow-400"
+                                    : "translate-y-2 scale-100"
+                                }`}
+                              >
+                                {placeholder}
+                              </label>
+                            </div>
+                            {form.formState.errors.phone && (
+                              <p className="text-red-400 text-sm mt-1">
+                                {form.formState.errors.phone.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+                    );
+                  }
+
+                  // остальные поля без изменений
+                  const rawValue = form.watch(id as keyof z.infer<typeof formSchema>);
+                  const value =
+                    typeof rawValue === "string"
+                      ? rawValue
+                      : rawValue === undefined || rawValue === null
+                      ? ""
+                      : String(rawValue);
+
                   const focused = focusStates[id] || false;
+
                   return (
                     <div key={id} className="relative w-full">
                       <div className="flex items-center space-x-5 border-b border-white/30 pb-2 w-full">
@@ -234,8 +301,9 @@ export default function ApplicationForm() {
                 <div className="flex items-center gap-3 flex-nowrap px-2">
                   <Checkbox
                     id="consent"
+                    checked={form.watch("consent")}
                     onCheckedChange={(checked) =>
-                      form.setValue("consent", checked as boolean)
+                      form.setValue("consent", checked as boolean, { shouldValidate: true })
                     }
                     className="shrink-0"
                   />
@@ -252,7 +320,7 @@ export default function ApplicationForm() {
                   <Button
                     type="submit"
                     size="lg"
-                    disabled={isSubmitting}
+                    disabled={isSubmitting || !form.formState.isValid}
                     className="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold px-6 sm:px-12 py-4 text-xl rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 max-w-full w-full sm:w-auto"
                   >
                     <Rocket className="mr-3 w-6 h-6" />

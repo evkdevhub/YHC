@@ -104,8 +104,8 @@ export default function Footer() {
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-gold w-5 h-5 mt-1" />
                   <address className="not-italic leading-relaxed">
-                    2487 Tradeport Dr Suite 106<br />
-                    Orlando, FL 32824, United States
+                    365 W Taft Vineland Rd, Suite 106 <br />
+        Orlando, FL 32824, United States
                   </address>
                 </div>
               </div>
