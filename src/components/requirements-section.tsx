@@ -1,6 +1,7 @@
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const payItems = [
   {
@@ -35,15 +36,15 @@ export default function RequirementsSection() {
       ?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const truckRef = useRef(null);
+  const isTruckInView = useInView(truckRef, { once: true, margin: "-100px" });
+
   return (
-    <section
-      
-      className="min-h-screen py-16 bg-light-gray flex items-center"
-    >
+    <section className="min-h-screen py-16 bg-light-gray flex items-center">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Заголовок */}
         <motion.div
-        id="pay"
+          id="pay"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -85,19 +86,22 @@ export default function RequirementsSection() {
             ))}
           </div>
 
-          {/* Правая колонка: трак + анимированные колёса + кнопка */}
-          <div>
+          {/* Правая колонка: трак + кнопка */}
+          <div ref={truckRef}>
             <div className="relative w-full h-auto">
-              {/* Трак */}
-              <motion.img
-                src="/truck.png"
-                alt="truck"
-                className="w-full"
-                initial={{ opacity: 0.5, x: 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ x: { duration: 2, ease: "easeOut" }, opacity: { duration: 1 } }}
-              />
+              {isTruckInView && (
+                <motion.img
+                  src="/truck.png"
+                  alt="truck"
+                  className="w-full"
+                  initial={{ opacity: 0.5, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    x: { duration: 2, ease: "easeOut" },
+                    opacity: { duration: 1 },
+                  }}
+                />
+              )}
             </div>
 
             {/* Кнопка */}
@@ -109,17 +113,17 @@ export default function RequirementsSection() {
               className="text-center mt-14"
             >
               <Button
-                onClick={scrollToApplication}
-                className="bg-gradient-to-r from-yellow-500 to-yellow-700 
-hover:from-lime-500 hover:to-lime-700 
-text-white tracking-wide font-extrabold text-xl 
-px-12 py-5 rounded-full 
-shadow-xl hover:shadow-2xl 
-transform hover:scale-105 
+  onClick={scrollToApplication}
+  className="bg-gradient-to-r from-yellow-500 to-yellow-700
+hover:from-lime-500 hover:to-lime-700
+text-white tracking-wider font-extrabold text-2xl lg:text-3xl
+px-16 py-6 lg:px-24 lg:py-8 rounded-full
+shadow-2xl hover:shadow-3xl
+transform hover:scale-110
 transition-all duration-300"
-              >
-                Become a Driver
-              </Button>
+>
+  Become a Driver
+</Button>
             </motion.div>
           </div>
         </div>

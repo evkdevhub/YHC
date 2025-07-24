@@ -3,20 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>My Star LLC</title>
+
+    <!-- Title -->
+    <title>Hiring CDL Class A Drivers – My Star Trucking Jobs USA</title>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo.png" />
-    <meta name="description" content="Drive for My Star LLC and enjoy top pay, reliable home time, excellent benefits, and a supportive team. Start your trucking career with us today!"  />
+
+    <!-- SEO Meta -->
+    <meta name="description" content="Now hiring CDL Class A drivers! Get high pay, steady miles, great home time and 24/7 support. Apply now to drive for My Star LLC." />
+    <meta name="keywords" content="CDL jobs, trucking jobs, hire CDL drivers, class A truck driver, truck driver job USA, semi truck job, otr driver, my star trucking careers" />
+    <meta name="author" content="My Star LLC" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Social Preview (Open Graph) -->
+    <meta property="og:title" content="Hiring CDL Class A Drivers – My Star Trucking Jobs USA" />
+    <meta property="og:description" content="Drive with My Star LLC: Top pay, great equipment, and real home time. Apply now!" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content="https://mystar-landing.vercel.app/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CDL Class A Drivers Wanted – Apply Today!" />
+    <meta name="twitter:description" content="OTR, Regional, and Dedicated routes. Work with a team that treats you like family." />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Добавляем сразу черный фон -->
+    <!-- Styles -->
     <style>
       html, body {
         margin: 0;
         height: 100%;
-        background-color: #000000; /* черный фон */
+        background-color: #000000;
       }
     </style>
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "title": "CDL Class A Truck Driver",
+      "description": "My Star LLC is now hiring CDL Class A drivers. Enjoy steady miles, top pay, 24/7 dispatch support, and great equipment.",
+      "identifier": {
+        "@type": "PropertyValue",
+        "name": "My Star LLC",
+        "value": "CDL2025"
+      },
+      "datePosted": "2025-07-23",
+      "validThrough": "2025-12-31",
+      "employmentType": "FULL_TIME",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "My Star LLC",
+        "sameAs": "https://mystar-landing.vercel.app",
+        "logo": "https://mystar-landing.vercel.app/logo.png"
+      },
+      "jobLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "US"
+        }
+      }
+    }
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
