@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const benefits = [
@@ -49,7 +49,7 @@ export default function BenefitsSection() {
           className="text-center mb-12 scroll-mt-24"
         >
           <h2 className="font-bold text-4xl lg:text-5xl text-cyan-950 mb-4">
-            Why Drive for My Star LLC?
+            Why Drive for YHC?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We don’t just hire drivers — we build careers. Join our family-owned company where your success comes first. Reliable pay, respect, and real growth await.
@@ -69,7 +69,7 @@ export default function BenefitsSection() {
               <Card className="bg-white shadow-lg hover:shadow-2xl transform transition duration-300 hover:-translate-y-1">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-3">
-                    <Star className="text-gold w-5 h-5 fill-current mr-2" />
+                    <CheckCircle className="text-yellow-500 w-5 h-5  mr-2" />
                     <h3 className="font-semibold text-lg text-cyan-950">
                       {benefit.title}
                     </h3>

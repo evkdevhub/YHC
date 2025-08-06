@@ -18,10 +18,10 @@ import {
   Phone,
   Mail,
   Rocket,
+  MessageSquareQuote,
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Добавляем строгую валидацию поверх базовой схемы
 const formSchema = insertApplicationSchema.extend({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
@@ -30,6 +30,7 @@ const formSchema = insertApplicationSchema.extend({
     .min(10, "Phone number must be at least 10 digits")
     .regex(/^[\d+()\-\s]+$/, "Phone number contains invalid characters"),
   consent: z.boolean().refine((val) => val === true, "Consent is required"),
+  message: z.string().optional(),
 });
 
 export default function ApplicationForm() {
@@ -43,8 +44,9 @@ export default function ApplicationForm() {
       phone: "",
       email: "",
       consent: false,
+      message: "",
     },
-    mode: "onChange", // валидировать по мере ввода
+    mode: "onChange", // ошибки показываем сразу, кроме телефона
   });
 
   const submitApplication = useMutation({
@@ -62,7 +64,7 @@ export default function ApplicationForm() {
       toast({
         title: "Submission Failed",
         description:
-          error.message || "Please try again or call us at 1-800-MYSTAR1",
+          error.message || "Please try again or call us at +1 707 800 4800",
         variant: "destructive",
       });
     },
@@ -139,7 +141,7 @@ export default function ApplicationForm() {
         }
 
         @media (max-width: 640px) {
-          input {
+          input, textarea {
             font-size: 1rem;
           }
           label {
@@ -178,7 +180,7 @@ export default function ApplicationForm() {
           <Card className="bg-white/5 border border-white/5 rounded-3xl backdrop-blur-lg shadow-3xl transition-all duration-300 max-w-2xl mx-auto w-full mb-10">
             <CardContent className="p-5 space-y-5 text-white">
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
-                {[
+                {[  
                   {
                     id: "fullName",
                     type: "text",
@@ -205,6 +207,8 @@ export default function ApplicationForm() {
                   if (id === "phone") {
                     const value = form.watch("phone") || "";
                     const focused = focusStates[id] || false;
+                    // Ошибка показываем только если телефон был "touched" (пользователь вышел из поля)
+                    const showError = form.formState.errors.phone && form.formState.touchedFields.phone;
                     return (
                       <Controller
                         key={id}
@@ -237,7 +241,7 @@ export default function ApplicationForm() {
                               </InputMask>
                               <label
                                 htmlFor={id}
-                                className={`absolute left-8 top-2 origin-left transform text-white transition-all duration-300 pointer-events-none ${
+                                className={`absolute left-8 top-0 origin-left transform text-white transition-all duration-300 pointer-events-none ${
                                   isActive(value, focused)
                                     ? "-translate-y-5 scale-75 text-yellow-400"
                                     : "translate-y-2 scale-100"
@@ -246,9 +250,9 @@ export default function ApplicationForm() {
                                 {placeholder}
                               </label>
                             </div>
-                            {form.formState.errors.phone && (
+                            {showError && (
                               <p className="text-red-400 text-sm mt-1">
-                                {form.formState.errors.phone.message}
+                                {form.formState.errors.phone?.message}
                               </p>
                             )}
                           </div>
@@ -257,7 +261,6 @@ export default function ApplicationForm() {
                     );
                   }
 
-                  // остальные поля без изменений
                   const rawValue = form.watch(id as keyof z.infer<typeof formSchema>);
                   const value =
                     typeof rawValue === "string"
@@ -284,7 +287,7 @@ export default function ApplicationForm() {
                         />
                         <label
                           htmlFor={id}
-                          className={`absolute left-8 top-2 origin-left transform text-white transition-all duration-300 pointer-events-none ${
+                          className={`absolute left-8 top-0 origin-left transform text-white transition-all duration-300 pointer-events-none ${
                             isActive(value, focused)
                               ? "-translate-y-5 scale-75 text-yellow-400"
                               : "translate-y-2 scale-100"
@@ -297,6 +300,41 @@ export default function ApplicationForm() {
                     </div>
                   );
                 })}
+
+                {/* textarea с высотой 2 строки и масштабом по высоте при фокусе */}
+                <div
+                  className={`relative w-full transform transition-transform duration-300 origin-top ${
+                    focusStates["message"] ? "scale-y-110" : "scale-y-100"
+                  }`}
+                >
+                  <div className="flex items-start space-x-5 border-b border-white/30 pb-2 w-full">
+                    <div className="mt-3 mr-2 flex-shrink-0">
+                      <MessageSquareQuote className="w-5 h-5 text-yellow-400" />
+                    </div>
+                    <textarea
+                      id="message"
+                      {...form.register("message")}
+                      placeholder=" "
+                      rows={2}
+                      value={form.watch("message") || ""}
+                      onFocus={() => setFocusStates((s) => ({ ...s, message: true }))}
+                      onBlur={() => setFocusStates((s) => ({ ...s, message: false }))}
+                      className="bg-transparent flex-1 w-full resize-none text-white placeholder-transparent outline-none text-lg px-1 py-2 rounded-md border border-transparent focus:border-transparent transition-colors"
+                      style={{ minHeight: "2.5rem" }}
+                    />
+                    <label
+                      htmlFor="message"
+                      className={`absolute left-8 top-0 origin-left transform text-white transition-all duration-300 pointer-events-none ${
+                        isActive(form.watch("message"), focusStates["message"])
+                          ? "-translate-y-5 scale-75 text-yellow-400"
+                          : "translate-y-2 scale-100"
+                      }`}
+                      style={{ paddingLeft: "0.25rem", paddingRight: "0.25rem" }}
+                    >
+                      Your Message
+                    </label>
+                  </div>
+                </div>
 
                 <div className="flex items-center gap-3 flex-nowrap px-2">
                   <Checkbox
@@ -311,7 +349,7 @@ export default function ApplicationForm() {
                     htmlFor="consent"
                     className="text-sm text-white select-none cursor-pointer leading-snug max-w-xs"
                   >
-                    I agree to receive calls, texts, and emails from My Star LLC
+                    I agree to receive calls, texts, and emails from YHC Logistic Services LLC
                     regarding employment opportunities. *
                   </label>
                 </div>

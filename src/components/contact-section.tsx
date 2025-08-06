@@ -8,12 +8,20 @@ const contacts = [
     icon: <Phone className="text-cyan-950 w-6 h-6" />,
     title: "Call Us",
     info1: (
-      <p
-        className="text-gray-700 cursor-pointer hover:underline"
-        onClick={() => window.open("tel:1-800-MYSTAR1")}
-      >
-        1-800-MYSTAR1
-      </p>
+      <div className="space-y-1">
+        <p
+          className="text-gray-700 cursor-pointer hover:underline"
+          onClick={() => window.open("tel:+17078004800")}
+        >
+          +1 (707) 800-4800
+        </p>
+        <p
+          className="text-gray-700 cursor-pointer hover:underline"
+          onClick={() => window.open("tel:+14246008015")}
+        >
+          +1 (424) 600-8015
+        </p>
+      </div>
     ),
     info2: "Mon – Fri, 9 AM – 6 PM ET",
   },
@@ -23,9 +31,9 @@ const contacts = [
     info1: (
       <p
         className="text-gray-700 cursor-pointer hover:underline"
-        onClick={() => window.open("mailto:recruiting@mystarllc.com")}
+        onClick={() => window.open("mailto:yhclogistic@gmail.com")}
       >
-        recruiting@mystarllc.com
+        yhclogistic@gmail.com
       </p>
     ),
     info2: "Response within 4 hours",

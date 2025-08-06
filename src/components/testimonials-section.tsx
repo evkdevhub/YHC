@@ -16,7 +16,7 @@ const testimonials: Testimonial[] = [
   {
     id: "1",
     name: "Rajveer S.",
-    location: "Texas, 2 years with MyStar",
+    location: "Texas, 2 years with YHC",
     imageUrl: "/Rajveer.jpg",
     rating: 5,
     content:
@@ -25,16 +25,16 @@ const testimonials: Testimonial[] = [
   {
     id: "2",
     name: "Marcus H.",
-    location: "Florida, 1 year with MyStar",
+    location: "Florida, 1 year with YHC",
     imageUrl: "/Marcus.jpg",
     rating: 5,
     content:
-      "I left my last company because I was tired of chasing paychecks. At My Star, the miles are real, the pay is consistent, and I’m treated with respect.",
+      "I left my last company because I was tired of chasing paychecks. At YHC, the miles are real, the pay is consistent, and I’m treated with respect.",
   },
   {
     id: "3",
     name: "Andre T.",
-    location: "Georgia, 3 years with MyStar",
+    location: "Georgia, 3 years with YHC",
     imageUrl: "/Andre.jpg",
     rating: 5,
     content:
@@ -86,7 +86,7 @@ export default function TestimonialsSection() {
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Don't just take our word for it — hear from the professionals who
-            drive for My Star LLC every day.
+            drive for YHC Logistic Services every day.
           </p>
         </motion.div>
 

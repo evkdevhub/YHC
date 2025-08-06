@@ -8,7 +8,7 @@ export default function HeroSection() {
   };
 
   const handleCall = () => {
-    window.location.href = "tel:1-800-697-8271";
+    window.location.href = "tel:1-707-800-4800";
   };
 
   return (
@@ -25,7 +25,7 @@ export default function HeroSection() {
         preload="auto"
         className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="/video/background.mp4" type="video/mp4" />
+        <source src="/video/YHC.webm" type="video/webm" />
       </video>
 
       {/* Overlay */}
@@ -42,8 +42,8 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="font-bold text-3xl sm:text-5xl lg:text-7xl leading-tight mb-4 sm:mb-6"
           >
-            Drive for a Company That Treats You Like a{" "}
-            <span className="text-gold">Star</span>
+             Work with a Team That Puts You{" "}
+            <span className="text-gold">First</span>
           </motion.h1>
 
           {/* Подзаголовок */}

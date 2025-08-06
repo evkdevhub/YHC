@@ -60,9 +60,9 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Лого и описание */}
             <div>
-              <img src="/logo5.png" alt="MY STAR LLC" className="h-14 w-auto mb-4" />
+              <img src="/logo7.png" alt="YHC LOGISTIC SERVICES LLC" className="h-14 w-auto mb-4" />
               <p className="text-gray-300 text-sm leading-relaxed">
-                Family-owned trucking company dedicated to treating our drivers like stars. Join our team and experience the difference.
+                Family-owned trucking company that puts you first. Join our team and experience the difference.
               </p>
             </div>
 
@@ -95,11 +95,11 @@ export default function Footer() {
               <div className="space-y-4 text-sm text-gray-300">
                 <div className="flex items-center space-x-3">
                   <Phone className="text-gold w-5 h-5" />
-                  <span>1-800-MYSTAR1</span>
+                  <span>+1 707 800 4800 <br></br>+1 424 600 8015</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Mail className="text-gold w-5 h-5" />
-                  <span>recruiting@mystarllc.com</span>
+                  <span>yhclogistic@gmail.com</span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-gold w-5 h-5 mt-1" />
@@ -113,7 +113,7 @@ export default function Footer() {
           </div>
 
           <div className="border-t border-white/20 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-            <p>© 2023 My Star LLC. All rights reserved. USDOT #3962364 | MC #1478119</p>
+            <p>© 2022 YHC LOGISTIC SERVICES LLC . All rights reserved. USDOT #3947881 | MC #1468286</p>
             
           </div>
         </div>
